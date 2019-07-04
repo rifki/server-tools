@@ -90,6 +90,7 @@ class Module(models.Model):
         for module in installed_modules:
             checksums[module.name] = module._get_checksum_dir()
         self._save_checksums(checksums)
+        _logger.info("save_installed_checksums Done!")
 
     @api.model
     def _save_installed_checksums(self):
@@ -98,6 +99,7 @@ class Module(models.Model):
         for module in installed_modules:
             checksums[module.name] = module._get_checksum_dir()
         self._save_checksums(checksums)
+        _logger.info("_save_installed_checksums Done!")
 
     @api.model
     def _get_modules_partially_installed(self):
