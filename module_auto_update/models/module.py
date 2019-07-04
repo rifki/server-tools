@@ -84,6 +84,14 @@ class Module(models.Model):
         Icp.set_param(PARAM_INSTALLED_CHECKSUMS, json.dumps(checksums))
 
     @api.model
+    def save_installed_checksums(self):
+        checksums = {}
+        installed_modules = self.search([('state', '=', 'installed')])
+        for module in installed_modules:
+            checksums[module.name] = module._get_checksum_dir()
+        self._save_checksums(checksums)
+
+    @api.model
     def _save_installed_checksums(self):
         checksums = {}
         installed_modules = self.search([('state', '=', 'installed')])
